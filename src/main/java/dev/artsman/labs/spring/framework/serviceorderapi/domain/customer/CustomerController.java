@@ -1,9 +1,14 @@
 package dev.artsman.labs.spring.framework.serviceorderapi.domain.customer;
 
-import static java.util.List.of;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+import static org.springframework.http.HttpStatus.OK;
 
 import java.util.Collection;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,11 +17,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/customers")
 class CustomerController {
 
+  @PersistenceContext
+  private EntityManager manager;
+
   @GetMapping
-  public Collection<Customer> all() {
-    var batman = new Customer(1L, "Batman", "batman@gotham.mail", 111111111L);
-    var joker = new Customer(2L, "Joker", "joker@gotham.mail", 222222222L);
-    return of(batman, joker);
+  public ResponseEntity<Collection<Customer>> all() {
+    var customers = manager.createQuery("select c from customer c", Customer.class).getResultList();
+    if (customers.isEmpty()) {
+      return new ResponseEntity<>(customers, NO_CONTENT);
+    } else {
+      return new ResponseEntity<>(customers, OK);
+    }
   }
 
 }

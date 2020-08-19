@@ -1,12 +1,28 @@
 package dev.artsman.labs.spring.framework.serviceorderapi.domain.customer;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity(name = "customer")
 class Customer {
+  @Id
+  @GeneratedValue(strategy = IDENTITY)
   private Long id;
+  @Column
   private String name;
+  @Column
   private String email;
+  @Column
   private Long phoneNumber;
+
+  @Deprecated
+  public Customer() {}
 
   public Customer(Long id, String name, String email, Long phoneNumber) {
     this.id = id;
