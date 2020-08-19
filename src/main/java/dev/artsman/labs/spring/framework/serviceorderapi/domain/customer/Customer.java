@@ -21,7 +21,10 @@ class Customer {
   @Column
   private Long phoneNumber;
 
-  @Deprecated
+  /**
+   * @deprecated it will be used only for jpa/hibernate framework.
+   */
+  @Deprecated(forRemoval = false)
   public Customer() {}
 
   public Customer(Long id, String name, String email, Long phoneNumber) {
