@@ -32,7 +32,7 @@ class CustomerController {
     }
   }
 
-  @GetMapping("/findByName/{name}")
+  @GetMapping("/name/{name}")
   public ResponseEntity<Collection<Customer>> findByName(@PathVariable String name) {
     var customer = repository.findAllByName(name);
     if (customer.isEmpty()) {
@@ -42,7 +42,7 @@ class CustomerController {
     }
   }
 
-  @GetMapping("/findByEmail/{email}")
+  @GetMapping("/email/{email}")
   public ResponseEntity<Customer> findByEmail(@PathVariable String email) {
     var customer = repository.findByEmail(email);
     if (customer.isEmpty()) {
@@ -52,7 +52,7 @@ class CustomerController {
     }
   }
 
-  @GetMapping("/findByPhoneNumber/{phoneNumber}")
+  @GetMapping("/phoneNumber/{phoneNumber}")
   public ResponseEntity<Collection<Customer>> findByPhoneNumber(@PathVariable Long phoneNumber) {
     var customer = repository.findAllByPhoneNumber(phoneNumber);
     if (customer.isEmpty()) {
