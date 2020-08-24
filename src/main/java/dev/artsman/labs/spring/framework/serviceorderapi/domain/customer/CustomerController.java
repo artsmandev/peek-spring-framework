@@ -2,12 +2,13 @@ package dev.artsman.labs.spring.framework.serviceorderapi.domain.customer;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.ResponseEntity.noContent;
 import static org.springframework.http.ResponseEntity.notFound;
 import static org.springframework.http.ResponseEntity.ok;
 
 import java.util.Collection;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -73,7 +74,7 @@ class CustomerController {
 
   @PostMapping
   @ResponseStatus(CREATED)
-  public Customer add(@RequestBody Customer customer) {
+  public Customer add(@Valid @RequestBody Customer customer) {
     return repository.save(customer);
   }
 

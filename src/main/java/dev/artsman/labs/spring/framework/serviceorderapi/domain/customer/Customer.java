@@ -8,16 +8,30 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity(name = "customer")
 class Customer {
   @Id
   @GeneratedValue(strategy = IDENTITY)
+  @Column
   private Long id;
+
+  @Size(max = 50)
+  @NotBlank
   @Column
   private String name;
+
+  @Size(max = 50)
+  @Email
+  @NotBlank
   @Column
   private String email;
+
+  @Digits(integer = 11, fraction = 0)
   @Column
   private Long phoneNumber;
 
