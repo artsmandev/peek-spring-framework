@@ -8,10 +8,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Range;
 
 @Entity(name = "customer")
 class Customer {
@@ -31,7 +34,7 @@ class Customer {
   @Column
   private String email;
 
-  @Digits(integer = 11, fraction = 0)
+  @Range(min = 11111111111L, max = 99999999999L)
   @Column
   private Long phoneNumber;
 

@@ -1,5 +1,7 @@
 package dev.artsman.labs.spring.framework.serviceorderapi.exceptionhandler;
 
+import static org.springframework.context.i18n.LocaleContextHolder.getLocale;
+
 import dev.artsman.labs.spring.framework.serviceorderapi.exceptionhandler.problem.Field;
 import dev.artsman.labs.spring.framework.serviceorderapi.exceptionhandler.problem.Problem;
 
@@ -18,7 +20,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-
 @ControllerAdvice
 class ApiExceptionHandler extends ResponseEntityExceptionHandler {
   private MessageSource messageSource;
@@ -34,7 +35,7 @@ class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     var fields = new ArrayList<Field>(ex.getBindingResult().getAllErrors().size());
     for (ObjectError error : ex.getBindingResult().getAllErrors()) {
       var name = ((FieldError) error).getField();
-      var message = this.messageSource.getMessage(error, LocaleContextHolder.getLocale());
+      var message = this.messageSource.getMessage(error, getLocale());
       fields.add(new Field(name, message));
     }
     var problem = new Problem(status.value(),"One or more fields are invalid, please check them and try again", fields);
