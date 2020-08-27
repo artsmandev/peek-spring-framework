@@ -34,7 +34,7 @@ class Customer {
   @Column
   private String email;
 
-  @Range(min = 11111111111L, max = 99999999999L)
+  @Range(min = 111111111L, max = 999999999L)
   @Column
   private Long phoneNumber;
 

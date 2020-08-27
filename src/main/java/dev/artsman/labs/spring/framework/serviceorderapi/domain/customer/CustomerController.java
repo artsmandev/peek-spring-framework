@@ -26,10 +26,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/customers")
 class CustomerController {
   private CustomerRepository repository;
+  private RegisterCustomerService registerCustomerService;
 
   @Autowired
-  public CustomerController(CustomerRepository repository) {
+  public CustomerController(CustomerRepository repository, RegisterCustomerService registerCustomerService) {
     this.repository = repository;
+    this.registerCustomerService = registerCustomerService;
   }
 
   @GetMapping
@@ -75,7 +77,7 @@ class CustomerController {
   @PostMapping
   @ResponseStatus(CREATED)
   public Customer add(@Valid @RequestBody Customer customer) {
-    return repository.save(customer);
+    return registerCustomerService.save(customer);
   }
 
   @PutMapping(value = "/{id}")
@@ -84,7 +86,7 @@ class CustomerController {
       return notFound().build();
     }
     customer.setId(id);
-    var updated = repository.save(customer);
+    var updated = registerCustomerService.save(customer);
     return ok(updated);
   }
 
@@ -93,7 +95,7 @@ class CustomerController {
     if (!repository.existsById(id)) {
       return notFound().build();
     }
-    repository.deleteById(id);
+    registerCustomerService.deleteById(id);
     return noContent().build();
   }
 
