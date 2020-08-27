@@ -5,7 +5,6 @@ import static java.util.Collections.unmodifiableCollection;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Collections;
 
 public class Problem {
   private Integer status;
@@ -17,6 +16,7 @@ public class Problem {
     this.status = status;
     this.title = title;
     this.dateTime = LocalDateTime.now();
+    this.fields = emptyList();
   }
 
   public Problem(Integer status, String title, Collection<Field> fields) {
