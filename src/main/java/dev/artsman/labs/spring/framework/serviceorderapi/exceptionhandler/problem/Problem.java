@@ -1,11 +1,16 @@
 package dev.artsman.labs.spring.framework.serviceorderapi.exceptionhandler.problem;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableCollection;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
 
+@JsonInclude(NON_EMPTY)
 public class Problem {
   private Integer status;
   private LocalDateTime dateTime;
